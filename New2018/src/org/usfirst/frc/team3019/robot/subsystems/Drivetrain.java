@@ -70,12 +70,21 @@ public class Drivetrain extends Subsystem {
 		setDefaultCommand(new Drive());
 	}
 	
+	public void tankDrive(double leftSpeed, double rightSpeed) {
+		dd.tankDrive(leftSpeed, rightSpeed);
+	}
+	
 	public void arcadeDrive(double moveValue, double rotateValue){
 		dd.arcadeDrive(moveValue * RobotMap.DRIVE_SCALE_FACTOR, rotateValue * RobotMap.TURN_SCALE_FACTOR);
 	}
 	
 	public void curvatureDrive(double moveSpeed, double turn) {
 		dd.curvatureDrive(moveSpeed * RobotMap.DRIVE_SCALE_FACTOR, turn * RobotMap.TURN_SCALE_FACTOR, true);
+	}
+	
+	public void autoDrive(double speed) {
+		leftGroup.set(-speed);
+		rightGroup.set(speed);
 	}
 	
 	public void postEncoderValues() {
