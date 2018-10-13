@@ -27,6 +27,7 @@ public class Robot extends IterativeRobot {
 	public static IntakeSystem intakeSystem;
 	public static ArmRotator armRotator;
 	public static OI oi;
+	public Timer timer;
 
 	SendableChooser<String> station = new SendableChooser<String>();
 	SendableChooser<Boolean> shouldRecord = new SendableChooser<Boolean>();
@@ -48,8 +49,7 @@ public class Robot extends IterativeRobot {
 		intakeSystem = new IntakeSystem();
 		armRotator = new ArmRotator();
 		oi = new OI();
-
-		// Add in auto
+		timer = new Timer();
 	}
 
 	/**
@@ -77,8 +77,8 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void autonomousInit() {
-		// Add in auto
-
+		timer.reset();
+		timer.start();
 	}
 
 	/**
@@ -86,6 +86,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		while (timer.get() < 2.5) {
+			driveTrain.autoDrive(0.4);
+		}
+		
 		Scheduler.getInstance().run();
 	}
 
